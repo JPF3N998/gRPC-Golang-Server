@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package="../compiled-protos";
+
+service SearchPokedex {
+   rpc GetPokemon(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+    string query = 1; // Pokemon name or PKMN ID
+}
+
+message SearchResponse {
+    repeated Pokemon pokemon = 1;
+}
+
+message Pokemon {
+    int32 pokemonId = 1;
+    string name = 2;
+    repeated string types = 3;
+    repeated Sprites sprites = 4;
+}
+
+message Sprites {
+    string back_default = 1;
+    string back_shiny = 2;
+    string front_default = 3;
+    string front_shiny = 4;
+}
