@@ -1,0 +1,34 @@
+syntax = "proto3";
+package pokemon;
+option go_package="../pokemon";
+
+service SearchPokedex {
+   rpc GetPokemon(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+    string name = 1; // Pokemon name or PKMN ID
+}
+
+message SearchResponse {
+    Pokemon pokemon = 1;
+}
+
+message Pokemon {
+    message Type{
+        message Type{
+            string name = 1;
+        }
+        Type type = 1;
+    }
+    message Sprites{
+        string back_default = 1;
+        string back_shiny = 2;
+        string front_default = 3;
+        string front_shiny = 4; 
+    }
+    int32 id = 1;
+    string name = 2;
+    Sprites sprites = 3;
+    repeated Type types = 4;
+}
