@@ -1,4 +1,4 @@
-module proto
+module github.com/JPF3N998/gRPC-Golang-Server/proto
 
 go 1.16
 
