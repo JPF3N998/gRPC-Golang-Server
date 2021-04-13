@@ -31,7 +31,7 @@ func NewPokedexClient(cc grpc.ClientConnInterface) PokedexClient {
 
 func (c *pokedexClient) GetPokemon(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*Pokemon, error) {
 	out := new(Pokemon)
-	err := c.cc.Invoke(ctx, "/pokemon.Pokedex/GetPokemon", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/Pokedex/GetPokemon", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func _Pokedex_GetPokemon_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pokemon.Pokedex/GetPokemon",
+		FullMethod: "/Pokedex/GetPokemon",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PokedexServer).GetPokemon(ctx, req.(*SearchRequest))
@@ -88,7 +88,7 @@ func _Pokedex_GetPokemon_Handler(srv interface{}, ctx context.Context, dec func(
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Pokedex_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pokemon.Pokedex",
+	ServiceName: "Pokedex",
 	HandlerType: (*PokedexServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
