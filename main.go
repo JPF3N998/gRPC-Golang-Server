@@ -9,7 +9,7 @@ import (
 	"net"
 	"net/http"
 
-	pb "local/pokemon"
+	pb "proto"
 
 	"google.golang.org/grpc"
 )
@@ -34,7 +34,7 @@ const (
 )
 
 type pokemonServer struct {
-	pb.UnimplementedSearchPokedexServer
+	pb.UnimplementedPokedexServer
 }
 
 func newServer() *pokemonServer {
@@ -44,11 +44,10 @@ func newServer() *pokemonServer {
 
 const URL = "https://pokeapi.co/api/v2/pokemon/"
 
-func (s *pokemonServer) GetPokemon(ctx context.Context, in *pb.SearchRequest) (*pb.SearchResponse, error) {
+func (s *pokemonServer) GetPokemon(ctx context.Context, in *pb.SearchRequest) (*pb.Pokemon, error) {
 	log.Printf("Getting info for pokemon: " + in.Name)
 
-	return &pb.SearchResponse{
-		Pokemon: extractInfo(fetch(URL + in.Name))}, nil
+	return extractInfo(fetch(URL + in.Name)), nil
 }
 
 // Make get requests ref: https://blog.logrocket.com/making-http-requests-in-go/
@@ -91,7 +90,7 @@ func main() {
 
 	grpcServer := grpc.NewServer(opts...)
 
-	pb.RegisterSearchPokedexServer(grpcServer, newServer())
+	pb.RegisterPokedexServer(grpcServer, newServer())
 	fmt.Println("Listening on ", port)
 	grpcServer.Serve(listener)
 

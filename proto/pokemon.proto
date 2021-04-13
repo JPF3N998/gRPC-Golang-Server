@@ -1,17 +1,13 @@
 syntax = "proto3";
-package pokemon;
-option go_package="../pokemon";
+package proto;
+option go_package="../proto";
 
-service SearchPokedex {
-   rpc GetPokemon(SearchRequest) returns (SearchResponse);
+service Pokedex {
+   rpc GetPokemon(SearchRequest) returns (Pokemon);
 }
 
 message SearchRequest {
     string name = 1; // Pokemon name or PKMN ID
-}
-
-message SearchResponse {
-    Pokemon pokemon = 1;
 }
 
 message Pokemon {
