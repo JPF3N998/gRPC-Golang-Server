@@ -14,21 +14,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-// Declare Go map/dictionary
-var APIMAP map[string]string
-
-// Instantiante the global map and add values to it
-func initMap() {
-	// Initialize map otherwise APIMAP is nil
-	APIMAP = make(map[string]string)
-	setValues()
-}
-
-// Add mappings to new API URLs
-func setValues() {
-	APIMAP["pokeapi"] = "https://pokeapi.co/api/v2/pokemon/"
-}
-
 const (
 	port = ":6809"
 )
@@ -79,8 +64,6 @@ func extractInfo(body string) *pb.Pokemon {
 }
 
 func main() {
-	initMap()
-
 	listener, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
